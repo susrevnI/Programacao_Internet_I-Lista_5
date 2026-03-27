@@ -2,7 +2,11 @@ const textInput = document.querySelector("#text-input");
 const btnAdd = document.querySelector("#btn-add");
 const listContent = document.querySelector(".list-content");
 
-btnAdd.addEventListener("click", () => {
+let addLine = (e) => {
+    if (!(e.type == "click" || (e.type == "keypress" && e.code == "Enter"))) {
+        return;
+    }
+
     if (!textInput.value) {
         return;
     }
@@ -28,4 +32,7 @@ btnAdd.addEventListener("click", () => {
     textInput.value = "";
 
     listContent.appendChild(li);
-});
+}
+
+btnAdd.addEventListener("click", addLine);
+textInput.addEventListener("keypress", addLine)
